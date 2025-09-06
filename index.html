@@ -1,47 +1,135 @@
+<!-- index.html (mobile menu now shows full-width search inside dropdown) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charity: Water</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header>
+    <nav>
+      <!-- Left logo -->
+      <div class="logo">
+        <img src="img/cw_logo-2.png" alt="Charity: Water Logo" />
+      </div>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+      <!-- Center search bar (desktop/tablet) -->
+      <div class="nav-search">
+        <input type="text" placeholder="Search..." />
+      </div>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
+      <!-- Hamburger for mobile -->
+      <button
+        class="hamburger"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-menu"
+        aria-label="Toggle navigation"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Menu (desktop: right-aligned) | mobile: dropdown under hamburger -->
+      <ul id="primary-menu" class="menu">
+        <!-- Mobile-only full-width search inside dropdown -->
+        <li class="mobile-search">
+          <input id="mobileSearch" type="text" placeholder="Search..." />
+        </li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">FAQ's</a></li>
+        <li class="auth"><a href="#">Sign Up | Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main content and sticky panel unchanged -->
+    <div class="main-content">
+      <div class="hero-image">
+        <img src="img/Hero1.jpg" alt="Placeholder 1" />
+        <img src="img/Hero4.png" alt="Placeholder 2" />
+        <img src="img/Hero5.png" alt="Placeholder 3" />
+        <img src="img/Hero2.jpg" alt="Placeholder 4" />
+        <img src="img/Hero3.jpg" alt="Placeholder 5" />
+        <img src="img/Hero6.png" alt="Placeholder 6" />
+      </div>
+      <div class="hero-content-wrapper sticky-panel">
+        <div class="hero-content">
+          <h1>Water That Lasts. Impact You See.</h1>
+          <h2>100% of your gift funds clean water, with updates from the communities you reach.</h2>
+          <div class="body-section">
             <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
+              Clean water doesn’t just change one life—it transforms entire communities. Your $10 helps bring safe water to children, parents, and grandparents alike, creating a future where everyone thrives together.
             </p>
+            <a class="cta-button" id="confettiButton">Give Today!</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <img src="img/cw_logo-2.png" alt="Charity: Water Logo" class="footer-logo" />
+
+  <script>
+    // Confetti (unchanged)
+    function launchConfetti(event) {
+      const button = event.target;
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const total = 90;
+      for (let i = 0; i < total; i++) {
+        const type = Math.random();
+        const el = document.createElement('div');
+        el.style.position = 'fixed';
+        el.style.top = `${centerY}px`;
+        el.style.left = `${centerX}px`;
+        el.style.pointerEvents = 'none';
+        el.style.zIndex = 9999;
+        if (type < 0.33) { el.style.width='8px'; el.style.height='8px'; el.style.borderRadius='50%'; }
+        else if (type < 0.66) { el.style.width='4px'; el.style.height='20px'; el.style.borderRadius='2px'; }
+        else { el.style.width='2px'; el.style.height='30px'; }
+        el.style.backgroundColor = `hsl(${Math.random()*360},100%,50%)`;
+        document.body.appendChild(el);
+        const angle = Math.random()*2*Math.PI;
+        const distance = Math.random()*200 + 100;
+        const x = Math.cos(angle)*distance;
+        const y = Math.sin(angle)*distance;
+        const rotation = Math.random()*720 - 360;
+        const frames = (type<0.33)
+          ? [{transform:'translate(0,0)',opacity:1},{transform:`translate(${x}px,${y}px)`,opacity:0}]
+          : (type<0.66)
+            ? [{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${x}px,${y}px) rotate(${rotation}deg) skewX(20deg)`,opacity:0}]
+            : [{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${x}px,${y}px) rotate(${rotation}deg) skewY(30deg)`,opacity:0}];
+        el.animate(frames,{duration:1500+Math.random()*1000,easing:'ease-in-out',fill:'forwards'});
+        setTimeout(()=>el.remove(),3000);
+      }
+    }
+    const btnEl = document.getElementById('confettiButton');
+    if (btnEl) btnEl.addEventListener('click', launchConfetti);
+
+    // Mobile menu toggle; focus mobile search on open
+    (function(){
+      const btn = document.querySelector('.hamburger');
+      const menu = document.getElementById('primary-menu');
+      const mobileSearch = document.getElementById('mobileSearch');
+      if(!btn||!menu) return;
+      const closeMenu=()=>{menu.classList.remove('show');btn.setAttribute('aria-expanded','false');document.removeEventListener('click',outside);document.removeEventListener('keydown',esc);};
+      const outside=(e)=>{if(!menu.contains(e.target)&&!btn.contains(e.target)) closeMenu();};
+      const esc=(e)=>{if(e.key==='Escape') closeMenu();};
+      btn.addEventListener('click',()=>{
+        const open = menu.classList.toggle('show');
+        btn.setAttribute('aria-expanded', String(open));
+        if (open) {
+          setTimeout(()=>{ if(mobileSearch) mobileSearch.focus(); }, 150);
+          document.addEventListener('click',outside);
+          document.addEventListener('keydown',esc);
+        } else { closeMenu(); }
+      });
+    })();
+  </script>
 </body>
 </html>
+

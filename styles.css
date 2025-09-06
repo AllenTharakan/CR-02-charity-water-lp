@@ -1,198 +1,70 @@
-/* charity: water Brand Colors & Fonts
+/* styles.css (adds mobile full-width search inside dropdown; desktop search remains centered) */
+@import url('https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;600;700&display=swap');
 
-Primary Colors:
-- Yellow:     #FFC907
-- Blue:       #2E9DF7
+body { margin:0; font-family:'Proxima Nova', sans-serif; color:#003366; }
+header { display:flex; flex-direction:column; min-height:100vh; }
 
-Secondary Colors:
-- Light Blue: #8BD1CB
-- Green:      #4FCB53
-- Orange:     #FF902A
-- Red:        #F5402C
-- Dark Green: #159A48
-- Pink:       #F16061
+/* Nav */
+nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:#FFF7E1; position:relative; z-index:2000; }
+nav .logo img { height:40px; width:auto; }
 
-Fonts:
-- Proxima Nova
-- Avenir
+/* Center search (desktop) */
+.nav-search { flex:1; display:flex; justify-content:center; margin:0 1rem; }
+.nav-search input { width:60%; max-width:360px; padding:0.45rem 0.8rem; border:1px solid #CBCCD1; border-radius:8px; font-size:0.95rem; }
 
-*/
+/* Menu */
+.menu { list-style:none; display:flex; gap:1rem; margin:0; padding:0; align-items:center; }
+.menu li a { color:#003366; text-decoration:none; font-weight:600; padding:0.5rem 0.9rem; border-radius:6px; transition:.3s; }
+.menu li a:hover { color:#FFC907; background:#003366; }
+.menu .auth a { font-weight:700; color:#003366; background:#FFC907; border-radius:8px; }
+.menu .auth a:hover { background:#003366; color:#FFC907; }
 
-/* 
-  Charity: Water Landing Page Styles
-  This CSS uses the provided color palette and beginner-friendly styles.
-*/
+/* Hide the mobile-search slot on desktop */
+.menu .mobile-search { display:none; }
+.menu .mobile-search input { width:100%; padding:0.65rem 0.9rem; border:1px solid #CBCCD1; border-radius:8px; font-size:1rem; }
 
-/* Set up the main font and background color for the whole page */
-body {
-  background-color: #f4f8fb; /* Soft light blue for a fresh look */
-  font-family: 'Avenir', 'Proxima Nova', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #222;
-}
+/* Layout */
+.main-content { flex:1; display:flex; align-items:stretch; min-height:0; }
+.hero-image { flex:1; background:#CBCCD1; display:grid; grid-template-columns:repeat(2,1fr); grid-auto-rows:minmax(250px, auto); gap:16px; padding:24px; box-sizing:border-box; }
+.hero-image img { width:100%; height:100%; object-fit:cover; border-radius:8px; transition:transform .3s, box-shadow .3s; }
+.hero-image img:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,.3); }
 
-/* Add a slight shadow and rounded corners to each section for depth */
-section {
-  background: #fff; /* White background for sections */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow */
-  margin: 24px 10px; /* Space between sections */
-  padding: 24px 16px;
-}
+.hero-content-wrapper { flex:1; background:#003366; display:flex; align-items:center; justify-content:center; padding:3rem 2rem; }
+.sticky-panel { position:sticky; top:0; height:100vh; }
+.hero-content { text-align:center; max-width:600px; }
+.hero-content h1 { font-size:2.5rem; margin-bottom:1rem; color:#FFC907; }
+.hero-content h2 { font-size:1.2rem; margin-bottom:1rem; color:#CBCCD1; }
+.hero-content .body-section { margin-top:6rem; }
+.hero-content p { font-size:1rem; line-height:1.5; margin-bottom:1.5rem; color:#FFC907; }
+/* Call-to-action button styles */
+.cta-button { background:#CBCCD1; color:#003366; padding:.8rem 1.5rem; font-size:1rem; font-weight:bold; border-radius:8px; display:inline-block; transition:.3s; }
+.cta-button:hover { background:#FFC907; color:#003366; transform:scale(1.1); }
 
-/* Hero Section Styles */
-.hero {
-  position: relative; /* Needed for overlay */
-  /* Set a background image that covers the whole section */
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-  background-size: cover;      /* Make the image cover the whole area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat;
-  color: #fff;                 /* White text for contrast */
-  text-align: center;          /* Center the text */
-  padding: 60px 20px;          /* Add space above and below */
-  border-radius: 0 0 16px 16px; /* Only round bottom corners */
+/* Fixed footer logo */
+.footer-logo { position:fixed; bottom:20px; right:20px; width:180px; opacity:.9; transition:transform .3s; z-index:3000; filter:grayscale(100%) brightness(0) invert(.8); }
+.footer-logo:hover { transform:scale(1.05); }
 
-  /* Add a dark overlay for better text readability */
-  /* This uses a simple linear-gradient overlay */
-  background-blend-mode: darken;
-  background-color: rgba(46, 157, 247, 0.45); /* Blue overlay */
-}
+/* Mobile */
+.hamburger { display:none; background:none; border:none; padding:.25rem; cursor:pointer; line-height:0; }
+.hamburger span { display:block; width:26px; height:3px; background:#FFC907; border-radius:2px; margin:5px 0; }
 
-/* Make the headline bold and modern */
-.hero h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Soft shadow for readability */
-}
+@media (max-width:900px){
+  .main-content { flex-direction:column; }
 
-/* Style the subheadline */
-.hero p {
-  font-size: 1.2em;
-  margin-top: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.12);
-}
+  /* Hide desktop search; show mobile search inside dropdown */
+  .nav-search { display:none; }
+  .menu .mobile-search { display:block; width:100%; padding:0.5rem; }
 
-/* Story Section Styles */
-.story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-/* Add accent color to section headings */
-h2 {
-  color: #2E9DF7; /* Primary blue */
-  margin-top: 0;
-  font-weight: bold;
-}
-
-/* Call-to-Action Section Styles */
-.call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-/* Style the impact story image */
-.impact-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
-}
-
-/* Donate Button Styles */
-.donate-button {
-  display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
-  padding: 14px 32px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
-  transition: background 0.3s, transform 0.2s;
-  border: none;
-  cursor: pointer;
-}
-
-/* Change button color when hovered */
-.donate-button:hover {
-  background-color: #159A48; /* Dark Green */
-  transform: translateY(-2px) scale(1.04); /* Slight lift */
-}
-
-/* Add some spacing between sections */
-section {
-  margin-bottom: 20px;
-}
-
-/* 
-  Media Queries for Responsive Design
-  Media queries help make your website look good on different screen sizes,
-  like phones (small screens) and computers (large screens).
-*/
-
-/* This media query applies styles when the screen is 600px wide or less (like on most phones) */
-@media (max-width: 600px) {
-  /* Make hero section padding smaller on small screens */
-  .hero {
-    padding: 32px 8px;
-    font-size: 1em;
+  /* Dropdown menu under hamburger */
+  .hamburger { display:inline-block; }
+  .menu {
+    position:absolute; top:100%; right:0; left:auto;
+    background:#FFF7E1; border-radius:8px; box-shadow:0 10px 24px rgba(0,0,0,.15);
+    flex-direction:column; align-items:stretch; gap:0; padding:0.5rem;
+    overflow:hidden; max-height:0; opacity:0; pointer-events:none; transition:max-height .35s ease, opacity .25s ease; z-index:3000;
+    width:min(92vw, 420px); /* nice width on phones */
   }
-
-  /* Make headline font size smaller so it fits on small screens */
-  .hero h1 {
-    font-size: 1.4em;
-  }
-
-  /* Make subheadline font size smaller */
-  .hero p {
-    font-size: 1em;
-  }
-
-  /* Make story and call-to-action sections have less padding */
-  .story,
-  .call-to-action,
-  .donation-section {
-    padding: 14px 8px;
-  }
-
-  /* Make impact story image smaller and stack above the text */
-  .impact-content {
-    display: block; /* Stack items vertically */
-    text-align: center;
-  }
-
-  .impact-image {
-    width: 90%;    /* Make image take up most of the width */
-    max-width: 220px;
-  }
-}
-
-/* This media query applies styles when the screen is wider than 600px (like on tablets and computers) */
-@media (min-width: 601px) {
-  /* Show image and text side by side in the impact story */
-  .impact-content {
-    display: flex;           /* Place items in a row */
-    align-items: center;     /* Vertically center items */
-    justify-content: center; /* Center the whole group */
-    gap: 28px;               /* Space between image and text */
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .impact-image {
-    width: 300px;
-  }
+  .menu li { margin:0; }
+  .menu li a { display:block; padding:0.8rem 1rem; text-align:center; }
+  .menu.show { max-height:420px; opacity:1; pointer-events:auto; }
 }
